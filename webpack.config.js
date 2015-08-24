@@ -56,5 +56,5 @@ module.exports = {
     },
     entry: entry,
     plugins: plugins,
-    devtool: isprod ? "source-map" : "cheap-module-eval-source-map"
+    devtool: isprod ? null : "cheap-module-eval-source-map"
 };
