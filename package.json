@@ -1,0 +1,40 @@
+{
+  "name": "slee.xyz",
+  "private": true,
+  "version": "0.0.0",
+  "description": "personal website",
+  "main": "server.js",
+  "dependencies": {
+    "babel-core": "^5.8.22",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.14.5",
+    "file-loader": "^0.8.4",
+    "html-loader": "^0.3.0",
+    "json-loader": "^0.5.2",
+    "node-libs-browser": "^0.5.2",
+    "node-sass": "^3.2.0",
+    "react": "^0.13.3",
+    "react-hot-loader": "^1.2.8",
+    "react-router": "^1.0.0-beta3",
+    "remarkable-loader": "^0.1.0",
+    "sass-loader": "^1.0.4",
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freshdried/slee.xyz"
+  },
+  "author": "Sean Lee <freshdried@gmail.com> (http://slee.xyz/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freshdried/react-hot-seed/issues"
+  },
+  "homepage": "https://github.com/freshdried/react-hot-seed"
+}
