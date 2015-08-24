@@ -29,12 +29,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/freshdried/slee.xyz"
+    "url": "https://github.com/sleep/slee.xyz"
   },
   "author": "Sean Lee <freshdried@gmail.com> (http://slee.xyz/)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/freshdried/react-hot-seed/issues"
-  },
-  "homepage": "https://github.com/freshdried/react-hot-seed"
 }
