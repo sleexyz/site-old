@@ -4,10 +4,8 @@ const App = React.createClass({
     render() {
         console.log("App rendered!");
         return (
-            <div id="app">
-                <div id="upsidedown">
-                    swag
-                </div>
+            <div id="App">
+                {this.props.children}
             </div>
         )
     }
