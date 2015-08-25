@@ -6,6 +6,9 @@ const App = React.createClass({
         return (
             <div id="App">
                 {this.props.children}
+                <div id="HooterBig">
+                    _slee
+                </div>
             </div>
         )
     }

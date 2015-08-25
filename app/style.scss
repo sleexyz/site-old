@@ -1,15 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono:400,700);
+$monospace: "Droid Sans Mono", monospace, "Courier New";
+
+
 html, body, #App {
     margin: 0;
     padding: 0;
-
-    height: 100%;
-    width: 100%;
 }
 
-#Upsidedown {
+#Landing {
+    padding: 10vmin;
+}
+
+#HooterBig{
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     height: 100%;
     width: 100%;
     font-size: 24vmin;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
