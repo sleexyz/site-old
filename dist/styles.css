@@ -1,0 +1,21 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.landing {
+    padding: 10vmin;
+    
+}
+
+.char {
+    height: 2em;
+    width: auto;
+}
+
+.name {
+}
