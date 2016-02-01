@@ -9,8 +9,17 @@ html, body {
     }
 }
 
-.landing {
+.page {
+    /* margin: 5vmin; */
     padding: 10vmin;
+    height: 100vh;
+    border-bottom: 1px solid #ddd;
+}
+.center {
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    justify-content: center;
 }
 
 .char {
@@ -21,6 +30,14 @@ html, body {
 .links {
   padding-top: 1em;
 }
+
 .name {
     text-transform: lowercase;
+}
+.quote {
+    padding: 1em 1em;
+}
+.quoteauth, .quoteauth a {
+    color: #aaa;
+    text-decoration: none;
 }
