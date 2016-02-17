@@ -12,9 +12,10 @@ html, body {
 .page {
     /* margin: 5vmin; */
     padding: 10vmin;
-    height: 100vh;
-    border-bottom: 1px solid #ddd;
+    /* height: 100vh; */
+    /* border-bottom: 1px solid #ddd; */
 }
+
 .center {
     display: flex;
     /* align-items: center; */
