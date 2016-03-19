@@ -31,6 +31,9 @@ html, body {
 .links {
   padding-top: 1em;
 }
+.links a {
+  padding-right: 1em;
+}
 
 .name {
     text-transform: lowercase;
@@ -38,6 +41,7 @@ html, body {
 .quote {
     padding: 1em 1em;
 }
+
 .quoteauth, .quoteauth a {
     color: #aaa;
     text-decoration: none;
