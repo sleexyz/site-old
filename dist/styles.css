@@ -9,11 +9,15 @@ html, body {
     }
 }
 
+a, a:visited {
+       text-decoration: none;
+       color: #888888
+}
+
 .page {
     /* margin: 5vmin; */
     padding: 10vmin;
-    /* height: 100vh; */
-    /* border-bottom: 1px solid #ddd; */
+    height: 100vh;
 }
 
 .center {
@@ -28,8 +32,8 @@ html, body {
     width: auto;
 }
 
-.links {
-  padding-top: 1em;
+.toppad {
+  padding-top: 3em;
 }
 .links a {
   padding-right: 1em;
