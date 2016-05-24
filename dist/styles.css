@@ -20,6 +20,11 @@ a, a:visited {
     height: 100vh;
 }
 
+#scout {
+    height: 3em;
+    width: 3em;
+}
+
 .center {
     display: flex;
     /* align-items: center; */
