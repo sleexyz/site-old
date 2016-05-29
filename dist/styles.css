@@ -15,9 +15,12 @@ a, a:visited {
 }
 
 .page {
-    /* margin: 5vmin; */
     padding: 10vmin;
     height: 100vh;
+}
+.quarterpage {
+    padding: 10vmin;
+    height: 25vh;
 }
 
 #scout {
