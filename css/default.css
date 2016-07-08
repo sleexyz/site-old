@@ -9,6 +9,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1.2em;
 }
 .container {
     max-width: 600px;
@@ -59,9 +60,14 @@ ul {
     padding-left: 0;
 }
 li {
-    padding-left: 0;
+    padding-left: 1em;
     text-indent: 0;
 }
+
+ul.postlist li {
+    padding-left: 0em;
+}
+
 a {
     text-decoration: none;
 }
@@ -72,4 +78,21 @@ a {
     text-transform: uppercase;
     line-height: 1.8em;
     font-size: 0.8em;
+}
+
+blockquote {
+  margin: 2em;
+  font-style: italic;
+}
+
+code {
+  font-size: 0.9em;
+}
+
+pre.sourceCode {
+  background: rgba(0,0,0,0.1);
+}
+sup, sub {
+    line-height: 0;
+    font-size: smaller;
 }
