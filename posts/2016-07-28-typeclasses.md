@@ -2,7 +2,7 @@
 title: "Typeclasses: The Good and The Bad"
 ---
 
-After playing with Haskell for half a year, I've grown to love and hate typeclasses. After all, Haskell would definitely not be Haskell without typeclasses; They enable Haskell's signature concision, yet they also present a few issues systemic to the language and ecosystem: a weakened role of types, semantic mismatch of algebraic signatures, and non-modularity of code.
+After playing with Haskell for half a year, I've grown to love and hate typeclasses. After all, Haskell would definitely not be Haskell without typeclasses; They enable Haskell's signature concision, yet they also present a few issues systemic to the language and ecosystem: 1) a weakened role of types, 2) a semantic mismatch with algebraic signatures, and 3) non-modularity of code.
 
 ## The Good
 
