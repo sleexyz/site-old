@@ -1,0 +1,46 @@
+
+So `(,)` is just a product of types in Haskell, right?
+
+
+
+No! A tuple in Haskell is *more* than just a product of types. It is a product *along with* a prescribed permutation of typeclass instances. The problem is that any given permutation unavoidably privillege some use-cases over others.
+
+
+For example, `(,)` has a implementation of `Functor` included in the Prelude which is functorial over the right parameter:
+```haskell
+instance Functor ((,) a) where
+    fmap f (x,y) = (x, f y)
+```
+But what if I want to `fmap` over the left parameter? Shouldn't our HKT capture notions of symmetry inherent to its algebraic construction? We cannot, because 
+
+Canonicity forces us to pick at most one instance, and therefore prescribe an asymmetry to the HKT. The issue is excacerbated by the fact that `(,)` has a privilleged syntactic form; it is not the algebraically-defined, but the socially-defined *canonical* version of a product type. 
+
+
+
+<br/>
+No only does canonicity of instances take away generality from our types, they also take away generality from our signatures. In a dual way to how a Haskell type is more than an algebraic construction, a Haskell typeclass signature is more than just an algebraic signature.
+
+``` haskell
+class Monoid m where
+  mempty :: m
+  mappend :: m -> m -> m
+```
+
+Upon naive observation, this typeclass signature looks like an algebraic signature of a monoid (minus requirements that it respect associative and unital laws).
+
+But because of the way typeclasses work, the typeclass does not simply describe monoids; it does *more*! This typeclasses signature in Haskell describes *canonical* monoids *corresponding* to a type. 
+
+The difference here is subtle. In math, we don't really say the natural numbers *are* a monoid; we say they *form* a monoid *with* an identity element and a binary operator (such that the associative and unital axioms hold). The data of the monoid is (\N, +, 0), not just (\N). In Haskell, we treat signatures like the later; the actual *monoid* is *implicit* along with a type:
+
+When we say...
+
+``` haskell
+instance Monoid [a] where
+  mempty = []
+  mappend = (++)
+```
+... we are not just describing a monoid; we are describing a monoid *and* describing its *canonicity* for a type. 
+
+Despite Haskell being advertised as a language with plenty of algebraic abstractions, it strikes me as backwards that there is no way to even talk about *instances of algebraic objects* by themselves! We can only talk about them through talking about the types that they correspond with.
+
+
