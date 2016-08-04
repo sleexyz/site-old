@@ -1,12 +1,15 @@
 ---
-title: "Typeclasses: The Good and The Bad"
+title: "A Critique of Typeclasses"
 ---
 
-After playing with Haskell for half a year, I've grown to love and hate typeclasses. After all, Haskell would definitely not be Haskell without typeclasses; They enable Haskell's signature concision, yet they also present a few issues systemic to the language and ecosystem: 1) a weakened role of types, 2) a semantic mismatch with algebraic signatures, and 3) non-modularity of code.
+After playing with Haskell for half a year, I've grown to love and hate typeclasses. After all, Haskell would not be Haskell without typeclasses; they enable Haskell's signature concision, yet they also present a few issues systemic to the language and ecosystem. In this post I'll speak of what I think are the three biggest issues caused by typeclasses:
+1) a weakened role of types,
+2) a semantic incompatibility with algebraic signatures,
+3) non-modularity of code.
 
 ## The Good
 
-Haskell's signature concision can be credited to typeclasses: we can get type-driven *ad-hoc* polymorphism with zero annotations. For example, we can use the same operators and same literals on numbers of different types, or use the same function to `show` terms of different types:
+Haskell's signature concision can be credited to typeclasses: we can get type-driven *ad-hoc* polymorphism with zero additional annotations. This gives Haskell its incredible expressive efficiency. For example, we can use the same operators and same literals on numbers of different types, or use the same function to `show` terms of different types:
 
 ```haskell
 foo :: Int
@@ -29,22 +32,24 @@ let bar : float = 2.0 +. 2.0
 let baz : string = string_of_int foo ^ string_of_float bar
 ```
 
-Notice how in OCaml, we need different function names and operators for morally the same functions. OCaml only admits parametric polymorphism -- functions that act *uniformly* across *all* types. Ad-hoc polymorphism allows one to write functions that can act *differently depending on a type*, across *some* types.
+Notice how in OCaml, we need different function names and operators for morally the same functions. OCaml only admits monomorphic and parametric polymorphic functions -- functions that act *uniformly* across *all* types. Ad-hoc polymorphism allows one to write functions that can act *differently depending on a type*, across *some* types.
 
 So how do typeclasses achieve ad-hoc polymorphism? Typeclasses relegate instance resolution to a typing judgment, so wherever a type of a term is unambiguous, we can unambiguously resolve a typeclass instance.
 
-We guarantee non-ambiguity because we require *canonical typeclass instances* -- in other words, globally unique typeclasses instances. When there is *just one* canonical instance in a given codebase, then we can pick that instance without ambiguity. In the next section, I mention a few issues that arise from requiring canonicity.
+We guarantee non-ambiguity because we require *canonical typeclass instances* -- in other words, globally unique typeclasses instances. When there is *just one* canonical instance in a given codebase, then we can pick that instance without ambiguity. 
+
+This seems like a nice property, until we realize that canonicity weakens the generality of our types to specific usages, and that canonicity imposes *global properties* on otherwise local pieces of code -- two of the three issues that I raise next.
 
 ## Bad
 
 
-### 1. Canonical instances make types *usage based*, as opposed to *structure based*
+### 1. Canonical instances un-generalize types
 
 > `Haskell Type = ADT + Name + (Permutation of instances)`
 
-Despite Haskell supporting ADTs, at the end of the day in Haskell are less algebraic than meets the eye! Because a type can only have one implementation of any given typeclass, Haskell types correspond not to algebraic constructions, but "*usage-based views*" of algebraic constructions, where a view carries a particular permutation of typeclass instances that prescribe its optimal usage. 
+What is a type in Haskell anyways? A type has a name, and a type has some sort of algebraic construction. If we consider typeclasses, we see that a type also has a particular permutation of canonical instances it corresponds to. Because different permutations are optimal for different usages, this means a type in Haskell really correspond to something weaker than it would be without typeclasses: a Haskell type is a *usage-based view* of a construction with a name, as opposed to just a construction with a name.
 
-Take `Monoid` instances for `Int`. In the Prelude, there are none. Which is strange, because in my head I can already think of two instances -- the additive and multiplicative monoids! But let's just go ahead and make one:
+Take `Monoid` implementations for `Int`. In the Prelude, there are none. Which is strange, because in my head I can already think of two instances -- the additive and multiplicative monoids! But let's just go ahead and make one:
 
 ``` haskell
 class Monoid m where
@@ -56,7 +61,7 @@ instance Monoid Int where
   mappend = (+)
 ```
 
-Great! But now what if we want the multiplicative Monoid? Well lets just define it...
+Great! But now what if we want the multiplicative Monoid? Well let's just define it...
 
 ``` haskell
 class Monoid m where
@@ -74,14 +79,17 @@ instance Monoid Int where
 ...
 ```
 
--- but wait, the preceeding code will never compile, because the two instances overlap. Haskell requires canonicitiy of instances, so we cannot have two instances.
+-- but wait, the preceeding code will never compile, because the two instances overlap. Haskell requires canonical instances, so we cannot have two instances.
 
+So because of this issue, the Prelude decides that `Int` should just have *no* implementation of Monoid. This means in regards to Monoid instances, `Int` really corresponds to a *usage-based view* of `Int` -- aka the view of *non-usage*.
 
-So because of this issue, the Prelude decides that `Int` should just have *no* implementation of Monoid. This means `Int` corresponds to a usage-based view that we *don't* use monoidal append for our type! There exists *representationally equal* types, namely `Sum Int` and `Product Int`, which individually correspond to their own usage based views.
+The only way to use the other monoid implementations is via newtyping -- we have to convert our type to *representationally equal* types, namely `Sum Int` and `Product Int`. These types are just different views of `Int`, just corresponding to different usages.
 
-The key issue here is that `Sum Int` and `Product Int` are representationally equal with `Int`, yet they *have* to exist if we want to use an Int with their corresponding Monoid instances. Keep in mind I'm not against newtyping -- in fact I'm a fan of using it as a semantic tool to prevent errors -- but forcing conversion to a new type just for a new usage seems suboptimal. **Typeclasses make types correspond to their usages**, which in my mind takes away the generality and elegance of their underlying algebraic construction.
+The key issue is that although they are representationally equal with `Int`, *to do anything useful with a term requires nominal equality*. So if a function takes an `Int`, we cannot pass it a `Sum Int`; it is a nominally different type! This means any time we want to take advantage of an additive monoid instance for `Int`, we have to do an explicit conversion to and from the new type. I would argue further that this conversion is unergonomic enough that we don't even really use it; after all, how often do you use `Sum Int` in real code?
 
-### 2. Algebraic signatures are semantically unfit for typeclasses
+By requiring canonicity of instances, **typeclasses weaken the role of types** to usage-based views. In our case, `Int` is not general enough of a type to account for different usages involing different Monoid instances. If we want to use other instances, we have to convert it to and from newtypes like `Sum Int` or `Product Int`; this is an unergonomic compromise at most, which could have been avoided if a Haskell type had the generality to admit different usages.
+
+### 2. Typeclasses are semantically incompatible with algebraic signatures
 
 What is a monoid? nlab says:
 
@@ -116,7 +124,7 @@ Which means in Haskell, we never really technically directly talk about actual m
 
 For algebraic signatures to be really be semantically truthful to their typeclass semantics, instead of `Monoid`, `Functor`, `Monad`, they should be called `HasCanonicalMonoid`, `HasCanonicalFunctor`, `HasCanonicalMonad`.
 
-### 3. Our language becomes non-modular.
+### 3. Canonical instances make Haskell non-modular.
 
 Perhaps the most insidious side effect of requiring canonicity of instances is that it leads *non-modular code* and a *non-modular ecosystem*.
 
@@ -128,7 +136,7 @@ If we don't allow orphan instances, then we have to anticipate all future uses o
 
 ## Oh no!
 
-Typeclasses are great features of the language because they enable ad-hoc polymorphism, but unfortunately they make types and algebraic structures clunky and code non modular. Oh no! What do we do now?
+Typeclasses are really great because they enable ad-hoc polymorphism, but unfortunately they make types and algebraic structures clunky and code non modular. Oh no! What do we do now? Can we get ad-hoc polymorphism another way that fixes these issues?
 
-In future posts I'll talk about language features that solve/obviate the problems introduced by typeclasses, a few of which also enable ad-hoc polymorphism. These might include implicits, modules, [modular implicits](http://arxiv.org/pdf/1512.01895.pdf), and [modular typeclasses](http://lambda-the-ultimate.org/node/1844).
+In future posts I'll hopefully talk about language features that solve/obviate the problems introduced by typeclasses, a few of which also get ad-hoc polymorphism. These might include Scala implicits, ML modules, [modular implicits](http://arxiv.org/pdf/1512.01895.pdf), and [modular typeclasses](http://lambda-the-ultimate.org/node/1844).
 
