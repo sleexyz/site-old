@@ -5,6 +5,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Sean Lee - $title$</title>
         <link rel="stylesheet" type="text/css" href="/css/default.css" />
+        $if(redirect)$
+          <meta http-equiv="refresh" content="0; url=$baseUrl$$redirect$"/>
+        $endif$
     </head>
     <body>
       <div class="container">

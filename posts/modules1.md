@@ -1,5 +1,7 @@
 ---
 title: Embedding ML Modules in Haskell
+date: 2016-07-07
+draft: True
 ---
 
 *Continutation from the previous post, [Haskell Types Are Not Abstract Enough](./posts/2016-07-07-typeclasses.html)*

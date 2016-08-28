@@ -1,5 +1,7 @@
 ---
-title: ML Modules: a comparison
+title: "ML Modules: a comparison"
+date: 2016-07-14
+draft: True
 ---
 
 Do these side-effects of canonicity have to exist in our programming languages? What happens if we don't use typeclasses? One good place to look is the ML family of languages.

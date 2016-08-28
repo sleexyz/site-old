@@ -1,5 +1,7 @@
 ---
 title: The Map is the Territory.
+date: 2016-07-06
+draft: True
 ---
 
 
