@@ -4,6 +4,8 @@ import Data.Monoid
 import Hakyll
 import Data.Maybe
 import Control.Monad
+import qualified Data.Set as S
+import Text.Pandoc.Options
 
 infixl 8 &
 (&) :: a -> (a -> b) -> b
@@ -13,6 +15,19 @@ infixl 5 <&>
 (<&>) :: Functor f => f a -> (a -> b) -> f b
 (<&>) = flip (<$>)
 
+
+
+pandocMathCompiler :: Compiler (Item String)
+pandocMathCompiler =
+  let mathExtensions = [Ext_tex_math_dollars, Ext_tex_math_double_backslash,
+                        Ext_latex_macros]
+      defaultExtensions = writerExtensions defaultHakyllWriterOptions
+      newExtensions = foldr S.insert defaultExtensions mathExtensions
+      writerOptions = defaultHakyllWriterOptions {
+                        writerExtensions = newExtensions,
+                        writerHTMLMathMethod = MathJax ""
+                      }
+  in pandocCompilerWith defaultHakyllReaderOptions writerOptions
 
 
 
@@ -30,14 +45,14 @@ rules = do
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocMathCompiler
             >>= loadAndApplyTemplate "templates/default.html" myContext
             >>= relativizeUrls
     -}
 
   match "posts/*" $ do
     route $ setExtension "html"
-    compile $ pandocCompiler
+    compile $ pandocMathCompiler
       >>= loadAndApplyTemplate "templates/post.html"    postCtx
       >>= loadAndApplyTemplate "templates/default.html" postCtx
       >>= relativizeUrls
@@ -92,8 +107,8 @@ postCtx
 myContext :: Context String
 myContext
   = mconcat [ mempty
-            -- , constField "baseUrl" "http://slee.xyz/"
-            , constField "baseUrl" "http://localhost:8080/"
+            , constField "baseUrl" "http://slee.xyz/"
+            -- , constField "baseUrl" "http://localhost:8080/"
             , defaultContext
             ]
 
