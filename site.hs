@@ -61,10 +61,11 @@ rules = do
     route idRoute
     compile $ do
       posts <- loadAll "posts/*" >>= recentFirst
-      let archiveCtx = mconcat [ listField "posts" postCtx (return posts)
-                               , constField "title" "Archives"
-                               , myContext
-                               ]
+      let archiveCtx = 
+            mconcat [ listField "posts" postCtx (return posts)
+                    , constField "title" "Archives"
+                    , myContext
+                    ]
 
       makeItem ""
         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -99,18 +100,17 @@ rules = do
 
 
 postCtx :: Context String
-postCtx
-  = mconcat [ dateField "date" "%B %d, %Y"
-            , myContext
-            ]
+postCtx = mconcat 
+  [ dateField "date" "%B %d, %Y"
+  , myContext
+  ]
 
 myContext :: Context String
-myContext
-  = mconcat [ mempty
-            , constField "baseUrl" "http://slee.xyz/"
-            -- , constField "baseUrl" "http://localhost:8080/"
-            , defaultContext
-            ]
+myContext = mconcat 
+  [ mempty
+  , constField "baseUrl" "http://slee.xyz/"
+  , defaultContext
+  ]
 
 main :: IO ()
 main = hakyll rules

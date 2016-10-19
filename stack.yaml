@@ -6,4 +6,4 @@ packages:
 - '.'
 extra-deps:
 - hakyll-4.8.3.2
-resolver: nightly-2016-07-06
+resolver: lts-7.3

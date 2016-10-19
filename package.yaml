@@ -1,0 +1,22 @@
+name: site
+dependencies:
+  - base
+
+executables:
+  site:
+    main: site.hs
+    dependencies:
+      - hakyll
+      - containers
+      - pandoc
+    ghc-options: -threaded
+
+tests:
+  spec:
+    main: test.hs
+    source-dirs:
+      - test
+    dependencies: 
+      - markdown-unlit
+      - hspec
+    ghc-options: -pgmL markdown-unlit

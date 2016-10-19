@@ -1,0 +1,33 @@
+-- This file has been generated from package.yaml by hpack version 0.14.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           site
+version:        0.0.0
+build-type:     Simple
+cabal-version:  >= 1.10
+
+executable site
+  main-is: site.hs
+  ghc-options: -threaded
+  build-depends:
+      base
+    , hakyll
+    , containers
+    , pandoc
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: test.hs
+  hs-source-dirs:
+      test
+  ghc-options: -pgmL markdown-unlit
+  build-depends:
+      base
+    , markdown-unlit
+    , hspec
+  other-modules:
+      Spec
+      TestSpec
+  default-language: Haskell2010
