@@ -5,3 +5,5 @@ _cache
 _site
 .stack-work
 dist
+npm-debug.log
+test/*Spec.lhs

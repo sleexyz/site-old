@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-set -x
+trap "pkill -P $$" SIGINT SIGTERM EXIT
+
+
+webpack-dev-server --config webpack.config.js &
 
 ghcid \
   --reload=posts \

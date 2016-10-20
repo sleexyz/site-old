@@ -1,7 +1,13 @@
 {
   "name": "site",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js"
+    "build": "stack build && stack exec -- site build",
+    "clean": "stack exec -- site clean",
+    "postinstall": "npm run build",
+    "push": "./scripts/push",
+    "start": "./scripts/watch",
+    "superclean": "npm run clean && rm -rf test/*Spec.lhs",
+    "test": "./scripts/setup-tests && stack test"
   },
   "dependencies": {
     "css-loader": "^0.25.0",

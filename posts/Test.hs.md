@@ -3,7 +3,7 @@ title: "Test"
 date: 2016-10-03
 ---
 
-# Type-che
+# Type-checker
 
 $\ln x = \int_{-\infty}^x \frac 1 y \, dy$
 

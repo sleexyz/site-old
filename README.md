@@ -1,21 +1,25 @@
 # [slee.xyz](http://slee.xyz)
 
 
+set up stack
 ```
 stack update
 stack setup
 ```
 
+install dependencies
 ```
-make
-```
-
-```
-./scripts/watch
+npm install
 ```
 
+start daemon
 ```
-./scripts/push
+npm start
+```
+
+push
+```
+npm run push
 ```
 
 
