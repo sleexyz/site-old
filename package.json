@@ -9,15 +9,14 @@
     "superclean": "npm run clean && rm -rf test/*Spec.lhs",
     "test": "./scripts/setup-tests && stack test"
   },
-  "dependencies": {
-    "css-loader": "^0.25.0",
-    "style-loader": "^0.13.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "express": "^4.14.0",
-    "express-livereload": "^0.0.24",
+    "css-loader": "^0.25.0",
+    "style-loader": "^0.13.1",
     "raw-loader": "^0.5.1",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
-  }
+  },
+  "author": "Sean Lee <freshdried@gmail.com>",
+  "license": "MIT"
 }
