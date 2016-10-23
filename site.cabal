@@ -22,12 +22,13 @@ test-suite spec
   main-is: test.hs
   hs-source-dirs:
       test
-  ghc-options: -pgmL markdown-unlit
+  ghc-options: -pgmL markdown-unlit -optL !pseudo
   build-depends:
       base
     , markdown-unlit
     , hspec
   other-modules:
+      Indexed1Spec
       Spec
-      TestSpec
+      TypingSpectrumSpec
   default-language: Haskell2010

@@ -3,11 +3,12 @@
   "scripts": {
     "build": "stack build && stack exec -- site build",
     "clean": "stack exec -- site clean",
+    "cleanTests": "rm -rf test/*Spec.lhs",
     "postinstall": "npm run build",
     "push": "./scripts/push",
-    "start": "./scripts/watch",
-    "superclean": "npm run clean && rm -rf test/*Spec.lhs",
-    "test": "./scripts/setup-tests && stack test"
+    "start": "./scripts/setup-tests && ./scripts/watch",
+    "superclean": "yarn run clean && yarn run cleanTests",
+    "test": "yarn run cleanTests && ./scripts/setup-tests && stack test"
   },
   "dependencies": {},
   "devDependencies": {

@@ -9,17 +9,17 @@ stack setup
 
 install dependencies
 ```
-npm install
+yarn install
 ```
 
 start daemon
 ```
-npm start
+yarn start
 ```
 
 push
 ```
-npm run push
+yarn run push
 ```
 
 

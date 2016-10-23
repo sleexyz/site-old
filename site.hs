@@ -73,7 +73,7 @@ rules = do
         >>= relativizeUrls
 
 
-  match "support/index.html" $ do
+  match "index.html" $ do
     route idRoute
     compile $ do
       posts <- loadAll "posts/*"

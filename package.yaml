@@ -19,4 +19,4 @@ tests:
     dependencies: 
       - markdown-unlit
       - hspec
-    ghc-options: -pgmL markdown-unlit
+    ghc-options: -pgmL markdown-unlit -optL !pseudo
