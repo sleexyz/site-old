@@ -1,6 +1,6 @@
 ---
 title: "Blah blah category of endofunctors..."
-date: 2016-10-03
+date: 2016-10-29
 draft: true
 ---
 $$ \def\lb{⟦} \def\rb{⟧} \def\cat#1{\mathbf #1}$$

@@ -1,6 +1,6 @@
 ---
 title: "Proofs without propositions?"
-date: 2016-10-03
+date: 2016-10-29
 draft: true
 ---
 

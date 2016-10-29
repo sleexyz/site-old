@@ -1,14 +1,13 @@
 {
   "name": "site",
   "scripts": {
-    "build": "stack build && stack exec -- site build",
-    "clean": "stack exec -- site clean",
-    "cleanTests": "rm -rf test/*Spec.lhs",
+    "build": "stack build && stack exec -- site build && webpack",
+    "cleanup": "stack exec -- site clean",
+    "cleanupTests": "rm -rf test/*Spec.lhs",
     "postinstall": "npm run build",
-    "push": "./scripts/push",
+    "push": "yarn run cleanup && yarn build && aws s3 sync --delete ./_site s3://slee.xyz --exclude \"*.map\"",
     "start": "./scripts/setup-tests && ./scripts/watch",
-    "superclean": "yarn run clean && yarn run cleanTests",
-    "test": "yarn run cleanTests && ./scripts/setup-tests && stack test"
+    "test": "yarn run cleanupTests && ./scripts/setup-tests && stack test"
   },
   "dependencies": {},
   "devDependencies": {

@@ -28,6 +28,7 @@ test-suite spec
     , markdown-unlit
     , hspec
   other-modules:
+      ExplicitIndexingSpec
       Indexed1Spec
       Spec
       TypingSpectrumSpec
