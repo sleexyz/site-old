@@ -94,6 +94,9 @@ ul.postlist li {
 .post-row {
     display: flex;
 }
+.post-row.draft {
+    display: none;
+}
 
 a.post-title {
     color: black;

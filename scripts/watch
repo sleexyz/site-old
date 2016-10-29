@@ -10,6 +10,7 @@ ghcid \
   --reload=templates \
   --reload=css \
   --reload=site.hs \
+  --reload=entry.js \
   --reload=index.html \
   -c 'stack repl site:exe:site site:test:spec --main-is site:exe:site' \
   -T ':cmd return "let main = Main.main \n :main build \n Spec.main"'

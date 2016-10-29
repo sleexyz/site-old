@@ -1,20 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+import Control.Monad
+import Data.Function
+import Data.Maybe
 import Data.Monoid
 import Hakyll
-import Data.Maybe
-import Control.Monad
 import qualified Data.Set as S
 import Text.Pandoc.Options
-
-infixl 8 &
-(&) :: a -> (a -> b) -> b
-(&) = flip ($)
-
-infixl 5 <&>
-(<&>) :: Functor f => f a -> (a -> b) -> f b
-(<&>) = flip (<$>)
-
 
 
 pandocMathCompiler :: Compiler (Item String)
@@ -41,15 +33,6 @@ rules = do
     route   idRoute
     compile compressCssCompiler
 
-    {-
-
-    match (fromList ["about.rst", "contact.markdown"]) $ do
-        route   $ setExtension "html"
-        compile $ pandocMathCompiler
-            >>= loadAndApplyTemplate "templates/default.html" myContext
-            >>= relativizeUrls
-    -}
-
   match "posts/*" $ do
     route $ setExtension "html"
     compile $ pandocMathCompiler
@@ -61,11 +44,10 @@ rules = do
     route idRoute
     compile $ do
       posts <- loadAll "posts/*" >>= recentFirst
-      let archiveCtx = 
-            mconcat [ listField "posts" postCtx (return posts)
-                    , constField "title" "Archives"
-                    , myContext
-                    ]
+      let archiveCtx = mempty
+            <> listField "posts" postCtx (return posts)
+            <> constField "title" "Archives"
+            <> myContext
 
       makeItem ""
         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -78,18 +60,10 @@ rules = do
     compile $ do
       posts <- loadAll "posts/*"
         >>= recentFirst
-        >>= filterM (\item -> do
-                        redir <- getMetadataField (itemIdentifier item) "redirect"
-                        return $ isNothing redir
-                    )
-        >>= filterM (\item -> do
-                        redir <- getMetadataField (itemIdentifier item) "draft"
-                        return $ isNothing redir
-                    )
-      let indexCtx = mconcat [ listField "posts" postCtx (return posts)
-                             , constField "title" "Home"
-                             , myContext
-                             ]
+      let indexCtx = mempty
+            <> listField "posts" postCtx (return posts)
+            <> constField "title" "Home"
+            <> myContext
 
       getResourceBody
         >>= applyAsTemplate indexCtx
@@ -100,17 +74,14 @@ rules = do
 
 
 postCtx :: Context String
-postCtx = mconcat 
-  [ dateField "date" "%B %d, %Y"
-  , myContext
-  ]
+postCtx = mempty
+  <> dateField "date" "%B %d, %Y"
+  <> myContext
 
 myContext :: Context String
-myContext = mconcat 
-  [ mempty
-  , constField "baseUrl" "http://slee.xyz/"
-  , defaultContext
-  ]
+myContext = mempty
+  <> constField "baseUrl" "http://slee.xyz/"
+  <> defaultContext
 
 main :: IO ()
 main = hakyll rules

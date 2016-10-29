@@ -1,7 +1,11 @@
 <ul class="postlist">
   $for(posts)$
     <li>
+      $if(draft)$
+      <div class="post-row draft">
+      $else$
       <div class="post-row">
+      $endif$
         <span class="date"> $date$ </span>
         <a class="post-title" href="$url$">$title$</a>
       </div>
