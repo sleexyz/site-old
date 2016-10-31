@@ -24,6 +24,7 @@ a:link, a:visited {
 .container {
     max-width: 600px;
     margin: 0 auto 0 auto;
+    padding: 30px;
     width: 600px;
     overflow-x: hidden;
 }
@@ -39,6 +40,9 @@ div.logo a {
     float: left;
     text-decoration: none;
     text-transform: lowercase;
+}
+
+.blur {
     filter: blur(10px);
 }
 
