@@ -24,7 +24,6 @@ yarn run push
 
 
 ## Technology
-This blog is generated with [Hakyll](https://jaspervdj.be/hakyll/),
 type-checked with [sol/markdown-unlit](https://github.com/sol/markdown-unlit),
 and tested with [hspec-discover](http://hspec.github.io/hspec-discover.html)
 

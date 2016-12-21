@@ -5,12 +5,14 @@ draft: true
 ---
 
 <div hidden>
+
 ~~~ {.haskell}
 module TypingSpectrumSpec where
 import Test.Hspec
 
 spec = it "really works!" $ pending
 ~~~
+
 </div>
 
 *i.e. incrementally (de)contextualizing Curry-Howard*

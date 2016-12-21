@@ -3,16 +3,18 @@ title: "Indexed Types for Fun and Subtyping"
 date: 2016-10-30
 draft: true
 ---
-$$ \def\lb{⟦} \def\rb{⟧} \def\cat#1{\mathbf #1}$$
+
 <div hidden>
-~~~ {.haskell}
+
+```haskell
 module ExplicitIndexingSpec where
 
 import Test.Hspec
 import Prelude hiding (Monad (..), pure)
 
 spec = it "really works!" pending
-~~~
+```
+
 </div>
 
 Subtyping is a notoriously tricky feature to support natively in a language. In general, the notion of a "subtype relation" is a powerful tool for modeling things, as we've seen historically with the proliferation of Object Oriented Programming. 
@@ -24,7 +26,7 @@ Fortunately, we can take advantage of subtyping without actually having to use a
 
 We reduce subtyping down to its bare minimum:
 
-* a set of types - $\cat C = \{a, b, c ...\}$
+* a set of types - $\mathbf C = \{a, b, c ...\}$
 * a *relation* on the types, $\leq$, which is
     * *reflexive* -  $a \leq a$
     * *transitive* -  if $a \leq b$ and $b \leq c$, then $a \leq c$
@@ -42,28 +44,24 @@ These subsumptions are materialized as explicit coercions. i.e. proof relevant i
 
 In other words, we have:
 
-* a [*preorder*](https://en.wikipedia.org/wiki/Preorder) $\cat C_\leq$. This is nothing than a reflexive, transitive relation.
-* a [presheaf](https://en.wikipedia.org/wiki/Preorder) from $\cat C_ \leq$ to $\cat C$, the underlying category of the language. This is a nothing more than a *contravariant* functor $el: \cat C_\leq^{op} \to \cat C$
+* a [*preorder*](https://en.wikipedia.org/wiki/Preorder) $\mathbf C_\leq$. This is nothing than a reflexive, transitive relation.
+* a [presheaf](https://en.wikipedia.org/wiki/Preorder) from $\mathbf C_ \leq$ to $\mathbf C$, the underlying category of the language. This is a nothing more than a *contravariant* functor $el: \mathbf C_\leq^{op} \to \mathbf C$
 
 ---
 
 If you like hierarhcy, you can strengthen your preorder to also be a [poset](https://en.wikipedia.org/wiki/Partially_ordered_set), which adds the additional constraint of
 
-* *antisymmetry* -  if $a \leq b$ and $b \leq c$, then $a \leq c$
+- *antisymmetry* -  if $a \leq b$ and $b \leq c$, then $a \leq c$
 
 If you *really* like hierarchy, you can strengthen your poset to be a [join-semilattice](https://en.wikipedia.org/wiki/Semilattice), which adds the additional constraint of
 
-* *Least upper bounds for all nonempty finite subsets* 
+- *Least upper bounds for all nonempty finite subsets*
 
 
 
-<div align=center>$preorder \leq poset \leq semilattice$</div>
+$$preorder \leq poset \leq semilattice$$
 
 
 In Java, the global maximum is `Object`. In Scala, the global maximum is `Any`.
 
 ---
-
-
-
-

@@ -1,31 +1,51 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+require('babel-loader');
+require('css-loader');
+require('style-loader');
+require('./src/loaders/markdown-loader');
+
 
 module.exports = {
   devtool: 'cheap-eval-source-map',
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/dev-server',
-    './entry.js'
+    'webpack-hot-middleware/client',
+    './src/index.js'
   ],
   output: {
-    path: path.join(__dirname, '_site'),
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/static/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
-    loaders: [{
-      test: /\.css$/,
-      loaders: ['style', 'css']
-    }, {
-      test: /\.html$/,
-      loader: "raw-loader"
-    }]
+    loaders: [
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader?modules!less-loader'
+      },
+      {
+        test: /\.md$/,
+        loader: 'markdown'
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        include: path.join(__dirname, 'src')
+      }
+    ]
   },
-  devServer: {
-    contentBase: './_site',
-    hot: true
+  resolveLoader: {
+    fallback: [
+      path.resolve(__dirname, 'src/loaders')
+    ]
+  },
+  resolve: {
+    root: [
+      path.resolve('./'),
+    ]
   }
 }
