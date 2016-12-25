@@ -2,6 +2,11 @@ name: site
 dependencies:
   - base
 
+executables:
+  site:
+    main: main.hs
+    dependencies: []
+
 tests:
   spec:
     main: test.hs

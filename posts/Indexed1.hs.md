@@ -14,7 +14,7 @@ $$ \def\lb{⟦} \def\rb{⟧} \def\cat#1{\mathbf #1}$$
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE UndecidableInstances #-}
-module Indexed1Spec where
+module Blog.Indexed1Spec where
 
 import Test.Hspec
 import Prelude hiding (Monad (..), pure)

@@ -7,7 +7,7 @@ draft: true
 <div hidden>
 
 ~~~ {.haskell}
-module TypingSpectrumSpec where
+module Blog.TypingSpectrumSpec where
 import Test.Hspec
 
 spec = it "really works!" $ pending

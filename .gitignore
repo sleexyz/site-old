@@ -6,4 +6,4 @@ _site
 .stack-work
 dist
 npm-debug.log
-test/*Spec.lhs
+haskell/test/Blog/*Spec.lhs

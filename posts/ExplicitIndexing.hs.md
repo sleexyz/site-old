@@ -7,7 +7,7 @@ draft: true
 <div hidden>
 
 ```haskell
-module ExplicitIndexingSpec where
+module Blog.ExplicitIndexingSpec where
 
 import Test.Hspec
 import Prelude hiding (Monad (..), pure)

@@ -24,7 +24,5 @@ yarn run push
 
 
 ## Technology
-type-checked with [sol/markdown-unlit](https://github.com/sol/markdown-unlit),
+Type-checked with [sol/markdown-unlit](https://github.com/sol/markdown-unlit),
 and tested with [hspec-discover](http://hspec.github.io/hspec-discover.html)
-
-MathJax parsed and rendered via https://www.jdreaver.com/posts/2014-06-22-math-programming-blog-hakyll.html
