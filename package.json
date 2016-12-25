@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test": "yarn run lint && yarn run test-haskell",
     "test-haskell": "yarn run test-haskell-setup && (cd haskell; stack test)",
-    "test-haskell-setup": "rm ./haskell/test/Blog/* ; cd posts ; find . -depth -name \"*.hs.md\" -exec sh -c 'ln \"$1\" \"../haskell/test/Blog/${1%.hs.md}Spec.lhs\"' _ {} \\;"
+    "test-haskell-setup": "rm -f ./haskell/test/Blog/*Spec.lhs ; cd posts ; find . -depth -name \"*.hs.md\" -exec sh -c 'ln \"$1\" \"../haskell/test/Blog/${1%.hs.md}Spec.lhs\"' _ {} \\;"
   },
   "dependencies": {
     "classnames": "^2.2.5",

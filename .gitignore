@@ -1,9 +1,7 @@
 node_modules/
-dist/bundle.js
-dist/bundle.js.map
-_cache
-_site
+dist/*
+!dist/index.html
 .stack-work
-dist
 npm-debug.log
+haskell/site.cabal
 haskell/test/Blog/*Spec.lhs
