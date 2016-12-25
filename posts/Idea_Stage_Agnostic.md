@@ -1,6 +1,7 @@
 ---
 title: "Idea: Stage-Agnostic Constraint Logic (Meta) Programming"
 date: 2016-12-18
+draft: true
 ---
 
 The following is a rough outline of a hypothetical programming environment. Note I only half know what I'm talking about.

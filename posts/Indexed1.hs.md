@@ -3,8 +3,11 @@ title: "Blah blah category of endofunctors..."
 date: 2016-10-29
 draft: true
 ---
-$$ \def\lb{⟦} \def\rb{⟧} \def\cat#1{\mathbf #1}$$
+
 <div hidden>
+
+$$ \def\lb{⟦} \def\rb{⟧} \def\cat#1{\mathbf #1}$$
+
 ~~~ {.haskell}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE UnicodeSyntax #-}
@@ -18,9 +21,10 @@ import Prelude hiding (Monad (..), pure)
 
 spec = it "really works!" pending
 ~~~
+
 </div>
 
-I wanted to write about indexed monads, but I figured I should write about monads first. 
+I wanted to write about indexed monads, but I figured I should write about monads first.
 So here it is; the world's worst monad tutorial:
 
 

@@ -1,15 +1,10 @@
 import React, {createClass, createElement} from 'react';
+import {lifecycle} from 'recompose';
 
 module.exports = {
-  createPure: (displayName, pureComponent) => {
-    const Component = createClass({
-      displayName,
-      render() {
-        return pureComponent(this.props);
-      }
-    });
-  },
-  WithProps: (props, component) => (defaultProps) => {
-    return createElement(component, _.merge({}, defaultProps, props));
-  }
+  setTitle: (mapPropsToTitle) => lifecycle({
+    componentDidMount() {
+      document.title = mapPropsToTitle(this.props);
+    }
+  })
 };

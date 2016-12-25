@@ -1,19 +1,25 @@
 import React, {createClass, createElement} from 'react';
-import {Link} from 'react-router';
-
 const cn = (require('classnames/bind')).bind(require('./style.less'));
-import posts from 'src/posts';
+import {Link} from 'react-router';
+import dateFormat from 'date-fns/format'
 
-const Post = ({post}) => {
+import {apply} from 'src/utils'
+import {setTitle} from 'src/hocs'
+
+const Post = (({post}) => {
   const postBody = {
     __html: post.body
   };
   return (
     <div>
-      <div className={cn('body')} dangerouslySetInnerHTML={postBody}>
+      <h1 className={cn('title')}>{post.title}</h1>
+      <div className={cn('date')}>{dateFormat(post.date, 'MMM DD, YYYY')}</div>
+      <div className={cn('content')} dangerouslySetInnerHTML={postBody}>
       </div>
     </div>
   );
-};
-
-module.exports = Post;
+});
+module.exports = apply(
+  Post,
+  setTitle((props) => props.post.title)
+);

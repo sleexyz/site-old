@@ -6,7 +6,7 @@ import {Router, browserHistory} from 'react-router';
 import 'src/global.less';
 import 'src/highlight.less';
 import posts from 'src/posts';
-import {WithProps} from 'src/hocs'
+import {withProps} from 'recompose';
 import App from 'src/app';
 import Post from 'src/post';
 import Landing from 'src/landing';
@@ -18,7 +18,7 @@ const routes = {
   indexRoute: {component: Landing},
   childRoutes: _.map(_.toPairs(posts), ([key, post]) => ({
     path: `posts/${key}`,
-    component: WithProps({post}, Post)
+    component: withProps({post})(Post)
   }))
 };
 
@@ -34,8 +34,7 @@ const Main = createClass({
 ReactDOM.render(<Main/>, document.getElementById('root'));
 
 if (module.hot) {
-  // accept all updates, rerender
-  module.hot.accept(false, function() {
+  module.hot.accept(undefined, function() {
     const Next = require('./app');
     ReactDOM.render(<Next/>, document.getElementById('root'));
   });
