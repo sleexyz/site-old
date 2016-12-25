@@ -1,6 +1,7 @@
 {
   "name": "site",
   "scripts": {
+    "build": "webpack --config ./webpack.production.config.js",
     "lint": "eslint .",
     "push": "aws s3 sync --delete ./_site s3://slee.xyz --exclude \"*.map\"",
     "start": "node server.js",

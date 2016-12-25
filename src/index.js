@@ -8,18 +8,23 @@ import 'src/highlight.less';
 import posts from 'src/posts';
 import {withProps} from 'recompose';
 import App from 'src/app';
-import Post from 'src/post';
+import my_posts from 'src/post';
 import Landing from 'src/landing';
+import NotFound from 'src/not_found';
 
+const postRoutes = _.map(_.toPairs(posts), ([key, post]) => ({
+  path: `posts/${key}`,
+  component: withProps({post})(my_posts)
+}));
 
 const routes = {
   path: '/',
   component: App,
   indexRoute: {component: Landing},
-  childRoutes: _.map(_.toPairs(posts), ([key, post]) => ({
-    path: `posts/${key}`,
-    component: withProps({post})(Post)
-  }))
+  childRoutes:  _.concat(postRoutes, {
+    path: '*',
+    component: NotFound
+  })
 };
 
 const Main = createClass({
