@@ -1,57 +1,68 @@
 ---
 title: "Typeclasses, revisted"
 date: 2016-12-18
-draft: true
 ---
 
-I wrote [a post](./posts/typeclasses) a while ago about issues I saw with typeclasses, namely how they
+I wrote [a post](./posts/typeclasses) a while ago about issues I saw with typeclasses. These were all issues that arose from the requirement that typeclasses have canonical instances:
 
-1. weaken the generality of types *in the presence of canonicity*
-2. are nonideal for describing algebraic structures *in the presence of canonicity*
-3. introduce non-modulary of one's codebase/the whole ecosystem *in the presence of canonicity*
+1. Typeclasses weaken the generality of types.
+2. Typeclasses are nonideal for describing algebraic structures.
+3. Typeclasses introduce non-modulary of one's codebase/the whole ecosystem.
 
-I've realized that these issues I raised are less about typeclasses themsleves, but more about how typeclasses are *(ab)used* in the absence of something like ML's modules system.
+In retrospect, all issues I in that post were less about typeclasses themselves, but more about how typeclasses are *abused* in the absence of a proper parametrized module system.
 
-If we suspend our annoyance for Haskell's lack of a proper parametrized module system (and maybe we can with [Backpack](http://blog.ezyang.com/category/haskell/backpack/)), then we can consider the real power typeclasses give you: not that of just ad-hoc polymorphism, but that of constraint-based *program synthesis*!
+I've come to realize that despite the issues they can cause when abused, typeclasses can also be very powerful tools if one considers them as an answer to not just ad-hoc polymorphism, but also *program synthesis*!
 
-## Typeclasses as Deterministic Constraint-Based Metaprogramming
-From a logic programming perspective, Haskell's typeclass system amounts to a *deterministic* constraint-based metaprogramming
+## Typeclasses as Logic Metaprogramming
+Haskell's typeclass system amounts to deterministic, type-driven constraint-based metaprogramming
 
-#### Deterministic
-Given a set of constraints and query, Haskell's typeclass resolution allows at most one answer, i.e. canonicity of instances.
-This to constrast with most logic programming languages, which support [non-determinism](https://en.wikipedia.org/wiki/Nondeterministic_programming)
-
-#### Constraint-Based
-Every instance declaration in Haskell comes in two parts; the constraint declaration, and the function definitions.
+### Deterministic
 
 TODO: elaborate ("haha")
 
-### Metaprogramming
-Typeclasses are ultimately mechanisms for compile-time generation of terms. In a language with typeclasses, one can, instead of always referencing terms by their binders, *generate* them during the elaboration phase of compilation.
+Given a set of constraints and query, Haskell's typeclass resolution allows *at most* one answer to enforce canonicity of instances.
+This to constrast with logic programming languages, which usually support [non-determinism](https://en.wikipedia.org/wiki/Nondeterministic_programming).
 
-Because typeclasses are often thought as extensions to the typesystem, this point of view is rarely brought up. Under this perspective, GHC actually supports two(!) "languages" for metaprogramming: Template Haskell *and* the constraint language!
+### Constraint-Based
+
+TODO: elaborate ("haha")
+
+Every instance declaration in Haskell comes in two parts; the constraint declaration, and the function definitions.
+
+### Type-driven
+
+
+### Metaprogramming
+Typeclasses are a system for programming the compile-time generation of terms. In a language with typeclasses, one can, instead of always referencing terms by their definitions, *generate* them during compilation by defining an appropriate system of types, classes and instances.
+
+Because typeclasses are often thought as extensions to the type system, the point of view of "metaprogramming" is rarely brought up. Under this perspective, GHC actually supports two(!) "languages" for metaprogramming: Template Haskell *and* the constraint language!
 
 
 ## Typeclasses for Program Synthesis
 
-Although typeclasses were invented as a principled solution to the problem of ad-hoc polymorphism, the way the constraint system has evolved has turned it into a powerful language for program synthesis. Under this perspective, ad-hoc polymorphism seem like just a minor detail.
+So if take and run with the idea of typeclasses as *a constraint-based system for programming the generation of terms*, you can achieve what people would consider program synthesis!
 
+[Servant Client](https://hackage.haskell.org/package/servant-client) is a prime example of a real-world example of how typeclasses allow for program synthesis. Servant API's are essentially type declarations that are sufficiently rich in information to generate a set of API client.
 
-[Servant Client](https://hackage.haskell.org/package/servant-client) is a prime example of a real-world example of how typeclasses allow for program synthesis. Servant API's are essentially type declarations that are sufficiently rich in information to generate a set of API client
-
-Haskell's support for generic programming essentially amounts to giving the constraint system additional compile-time information about types. This gives us the ability to do things like [*derive* JSON serializers and deserializers](https://artyom.me/aeson#records-and-json-generics) for our types just based on information annotated by GHC, which we get for free!
+Another example: Haskell's mechanism for generics amounts to giving the constraint system additional information about types. This gives us the ability to do things like [*derive* JSON serializers and deserializers](https://artyom.me/aeson#records-and-json-generics) for our types at compile-time just based on information annotated by GHC, which we get for free!
 
 ## Typeclasses for Proof Generation
-By Curry-Howard, if typeclasses can be thought of a constraint-based mechanism for type-directed program synthesis, typeclases can also be thought of a constraint-based mechanism for type-directed *proof generation*.
+By the Curry-Howard isomorphism, if typeclasses can be thought of a constraint-based mechanism for type-directed program synthesis, typeclases can also be thought of a constraint-based mechanism for type-directed *proof generation*.
 
 [This Agda-wiki article](http://agda.readthedocs.io/en/latest/language/instance-arguments.html#proof-search) gives a simple example of this in Agda.
 
 This is to contrast with *tactics*, which provide a more direct method for metaprogramming proofs.
 
-## Typeclasses and Dependent Types
+## But typeclasses only work at compile-time...
 
 While writing production Haskell at [Originate](http://www.originate.com/), the feature I wish I had the most was some way to leverage the constraint system at runtime.
 
-To use Haskell's constraint system at runtime always requires *first* coercing terms into concrete, monomorphic types, at which point the instances already exist. 
+To use Haskell's constraint system at runtime always requires *coercing* terms into concrete, monomorphic types. There is no way to dynamically generate a type-level value at runtime...
 
-However, with a language that supports both dependent types and typeclasses where constraints are defined, one can probably do runtime *term-driven* program synthesis... I'm going to try that next :)
+### Typeclasses and Dependent Types = Runtime, type-safe program synthesis?
+
+...unless we have dependent types!
+
+With a language that supports both dependent types and typeclasses, one can probably do runtime program synthesis.
+
+*To be continued :)*
