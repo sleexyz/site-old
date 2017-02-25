@@ -1,6 +1,7 @@
 ---
 title: "Typeclasses, revisted"
 date: 2016-12-18
+draft: true
 ---
 
 I wrote [a post](./posts/typeclasses) a while ago about issues I saw with typeclasses. These were all issues that arose from the requirement that typeclasses have canonical instances:

@@ -32,9 +32,9 @@ app.use(serveStatic(path.join(__dirname, 'static')));
 app.use('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'static/index.html'));
 });
-app.listen(3000, (err) => {
+app.listen(8080, (err) => {
   if (err) {
     return console.error(err);
   }
-  console.log('Listenting at http://localhost:3000');
+  console.log('Listenting at http://localhost:8080');
 });
