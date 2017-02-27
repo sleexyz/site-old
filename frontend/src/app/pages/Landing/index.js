@@ -17,10 +17,10 @@ margin: 4em 0;
 const Icon = styled.div`
 filter: blur(10px);
 background-size: @icon;
-background-image: url(${props => props.path});
+background-image: url("${props => props.path}");
 background-repeat: no-repeat;
-width: @icon;
-height: @icon;
+width: 2em;
+height: 2em;
 margin: 2em 0;
 `;
 

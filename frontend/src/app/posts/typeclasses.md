@@ -45,7 +45,7 @@ We guarantee non-ambiguity because we require *canonical typeclass instances* --
 
 On one hand, having only one valid instance at all times makes programming a lot easier, since one does not have to think of a changing instance context. On the other hand, it causes a few issues that I explore next:
 
-## Bad
+## The Bad
 
 
 ### 1. Canonical instances make types less reusable
@@ -124,14 +124,23 @@ class Monoid m where
 instance Int Monoid where
   zero = 0
   (<>) = (+)
-
 ```
 
 Is Int the monoid? The monoid is the typeclass *instance*, as it carries the data of the type, the distinguished term of that type, and the binary operator on that type. In Haskell, this instance can only be talked about through `Int`, the type it corresponds to!
 
-Which means in Haskell, we never really technically directly talk about actual monoids, functors, monads, etc. despite Haskell being a language known for having all these algebraic structures! **In Haskell, we can only talk about algebraic structures through the type they are implicitly carried around with for typeclass instance resolution.**
+Which means in Haskell, we never really technically directly talk about actual monoids, functors, monads, etc. despite Haskell being a language known for having all these algebraic structures! In Haskell, we can only talk about algebraic structures through the type they are implicitly carried around with for typeclass instance resolution.
 
-For algebraic signatures to be really be semantically truthful to their typeclass semantics, instead of `Monoid`, `Functor`, `Monad`, they should be called `HasCanonicalMonoid`, `HasCanonicalFunctor`, `HasCanonicalMonad`.
+For typeclasses to really semantically reflect their algebraic signatures, instead of `Monoid`, `Functor`, `Monad`, they should be called `HasCanonicalMonoid`, `HasCanonicalFunctor`, `HasCanonicalMonad`, i.e.
+
+``` Haskell
+class HasCanonicalMonoid m where
+  zero :: m
+  (<>) ::  m -> m -> m
+
+instance Int HasCanonicalMonoid where
+  zero = 0
+  (<>) = (+)
+```
 
 ### 3. Canonical instances make Haskell non-modular.
 
