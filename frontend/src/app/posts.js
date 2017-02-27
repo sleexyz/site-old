@@ -6,4 +6,5 @@ const requireAllAsObj = (requireContext) =>
     path.basename(key).split('.')[0],
     requireContext(key),
   ])));
-module.exports = requireAllAsObj(require.context('app/posts', true, /md$/));
+
+export default requireAllAsObj(require.context('app/posts', true, /md$/));

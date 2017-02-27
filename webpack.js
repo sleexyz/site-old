@@ -56,21 +56,23 @@ module.exports = (mode /* : Mode */) => ({
   module: {
     loaders: [
       {
-        test: /\.less$/,
-        loader: 'style-loader!css-loader?modules!less-loader',
-      },
-      {
         test: /\.md$/,
-        loader: 'markdown-loader',
+        use: [
+          { loader: 'markdown-loader' },
+        ],
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, 'frontend', 'src'),
+        use: [
+          { loader: 'babel-loader' },
+        ],
+        include: path.resolve(__dirname, 'frontend', 'src'),
       },
       {
         test: /\.png$/,
-        loader: 'file',
+        use: [
+          { loader: 'file-loader' },
+        ],
       },
     ],
   },

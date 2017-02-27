@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import _ from 'lodash';
-import { withProps } from 'recompose';
+import { withProps } from 'app/hocs';
 import posts from 'app/posts';
 import App from 'app/components/App';
 import Landing from 'app/pages/Landing';

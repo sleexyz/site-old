@@ -1,8 +1,28 @@
 // @flow
 import React, { Component } from 'react';
-import cn from 'classnames/bind';
+import styled from 'styled-components';
 import { setTitle } from 'app/hocs';
+import githubIcon from 'app/images/github.png';
+import twitterIcon from 'app/images/twitter.png';
 import Contents from './Contents';
+
+const Description = styled.div`
+margin: 4em 0;
+`;
+
+const Socials = styled.div`
+margin: 4em 0;
+`;
+
+const Icon = styled.div`
+filter: blur(10px);
+background-size: @icon;
+background-image: url(${props => props.path});
+background-repeat: no-repeat;
+width: @icon;
+height: @icon;
+margin: 2em 0;
+`;
 
 class Landing extends Component {
   props: {
@@ -11,17 +31,17 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <div className={cn('description')}>
+        <Description>
           morphism plumber
-        </div>
-        <div className={cn('socials')}>
+        </Description>
+        <Socials>
           <a href={'https://github.com/sleexyz'}>
-            <div className={cn('github')} />
+            <Icon path={githubIcon} />
           </a>
           <a href={'https://twitter.com/sleexyz'}>
-            <div className={cn('twitter')} />
+            <Icon path={twitterIcon} />
           </a>
-        </div>
+        </Socials>
         <Contents showDrafts={this.props.router.location.query.showDrafts === 'true'} />
       </div>
     );
