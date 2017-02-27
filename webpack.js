@@ -11,7 +11,7 @@ module.exports = (mode /* : Mode */) => ({
   devtool: (() => {
     switch (mode) {
       case 'dev': return 'cheap-eval-source-map';
-      case 'prod': return null;
+      case 'prod': return undefined;
       default: return impossible(mode);
     }
   })(),
@@ -29,7 +29,7 @@ module.exports = (mode /* : Mode */) => ({
     }
   })(),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist', 'gen'),
     filename: 'bundle.js',
     publicPath: '/gen/',
   },
