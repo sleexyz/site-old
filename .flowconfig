@@ -1,0 +1,37 @@
+[ignore]
+
+# for styled-components
+.*/node_modules/styled-components/src/.*test.js
+.*/node_modules/styled-components/src/test
+.*/node_modules/styled-components/flow-typed/npm/express
+.*/node_modules/styled-components/dangerfile.js
+
+# for this project
+./**/gen
+
+
+[include]
+
+# for this project
+./frontend/src/**/*.js
+
+[libs]
+
+# for styled-components
+node_modules/styled-components/flow-typed/react-native.js
+node_modules/styled-components/flow-typed/glamor_vx.x.x.js
+node_modules/styled-components/flow-typed/lodash_v4.x.x.js
+node_modules/styled-components/flow-typed/inline-style-prefixer_vx.x.x.js
+
+
+[options]
+
+# for styled-components
+suppress_comment=.*\\$FlowFixMe
+suppress_comment=.*\\$FlowInvalidInputTest
+unsafe.enable_getters_and_setters=true
+
+# for this project
+module.system.node.resolve_dirname=frontend/src
+module.system.node.resolve_dirname=node_modules
+suppress_comment=\\(.\\|\n\\)*\\$ExpectError

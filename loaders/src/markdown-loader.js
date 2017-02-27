@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const frontMatter = require('front-matter');
 const markdownIt = require('markdown-it');
 const markdownItMathjax = require('markdown-it-mathjax');
@@ -15,15 +16,15 @@ const highlight = (str, lang) => {
   return '';
 };
 
-markdown = markdownIt({
+const markdown = markdownIt({
+  highlight,
   html: true,
-  highlight: highlight
 }).use(markdownItMathjax());
 
-module.exports = function (content) {
+module.exports = function markdownLoader(content) {
   this.cacheable();
   const meta = frontMatter(content);
   const body = markdown.render(meta.body);
-  const result = _.merge({}, meta.attributes, {body});
+  const result = _.merge({}, meta.attributes, { body });
   return `module.exports = ${JSON.stringify(result)}`;
-}
+};

@@ -1,5 +1,11 @@
-@import "~src/variables";
 @icon: 2rem;
+
+.text-label {
+  font-size: .8rem;
+  text-transform: uppercase;
+  color: #666;
+  min-width: 8.75rem;
+}
 
 .contents {
   margin: 4rem 0;
@@ -20,7 +26,7 @@
 .twitter {
   filter: blur(10px);
   background-size: @icon;
-  background-image: url("static/images/twitter.png");
+  background-image: url("src/images/twitter.png");
   background-repeat: no-repeat;
   width: @icon;
   height: @icon;
@@ -30,7 +36,7 @@
 .github {
   filter: blur(10px);
   background-size: @icon;
-  background-image: url("static/images/octocat.png");
+  background-image: url("src/images/octocat.png");
   background-repeat: no-repeat;
   width: @icon;
   height: @icon;
@@ -54,8 +60,6 @@
     }
   }
 }
-
-
 
 .post {
 }
