@@ -1,6 +1,5 @@
 node_modules/
-dist/*
-!dist/index.html
+dist/gen/*
 .stack-work
 npm-debug.log
 haskell/site.cabal

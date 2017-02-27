@@ -4,6 +4,7 @@ import path from 'path';
 const requireAllAsObj = (requireContext) =>
   _.fromPairs(_.map(requireContext.keys(), ((key) => [
     path.basename(key).split('.')[0],
-    requireContext(key)
+    requireContext(key),
   ])));
-module.exports = requireAllAsObj(require.context('../posts', true, /md$/));
+
+export default requireAllAsObj(require.context('app/posts', true, /md$/));
