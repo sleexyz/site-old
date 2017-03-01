@@ -3,5 +3,5 @@ title: Hello World
 date: 2016-07-03
 ---
 
-This will be a blog mostly dedicated to programming, programming languages, and pretty things from the [abstract nonsensical](https://ncatlab.org/nlab/show/Yoneda+lemma)
-to the [purely perceptual](https://hylogen.com).
+This could be a blog about pretty things, like [nonsense](https://ncatlab.org/nlab/show/Yoneda+lemma)
+or [shaders](https://hylogen.com). Or it could be about boring things like BEEP BOOP.
