@@ -10,7 +10,7 @@ const impossible /* : empty => any */ = () => null;
 module.exports = (mode /* : Mode */) => ({
   devtool: (() => {
     switch (mode) {
-      case 'dev': return 'cheap-eval-source-map';
+      case 'dev': return 'cheap-module-source-map';
       case 'prod': return undefined;
       default: return impossible(mode);
     }
