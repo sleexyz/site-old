@@ -16,22 +16,20 @@ const Content = styled.div`
 margin-top: 4em;
 `;
 
-const Name = styled.div`
-filter: blur(8px);
+const Name = styled.a`
 text-decoration: none;
-color: inherit;
+color: white;
 &:visited {
   color: inherit;
+  text-decoration: none;
 }
 `;
 
 const Header = () => {
   return (
-    <Link to={'/'}>
-      <Name>
-        sean lee
-      </Name>
-    </Link>
+    <Name>
+      sean lee
+    </Name>
   );
 };
 

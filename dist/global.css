@@ -19,6 +19,8 @@ body {
   line-height: 1.25em;
   min-height: 100vh;
   overflow-y: scroll;
+  background-image: url(./xp.jpg);
+  background-size: cover;
 }
 
 

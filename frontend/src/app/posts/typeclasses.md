@@ -1,6 +1,7 @@
 ---
 title: "A Critique of Typeclasses"
 date: 2016-07-28
+draft: true
 ---
 
 *Note: Since writing this, I've become much less bothered by the issues outlined here. Typeclasses amount to a mechanism for type-directed logic metaprogramming, which can be used for some pretty badass program generation. [Servant Client is an example.](https://hackage.haskell.org/package/servant-client)*

@@ -1,6 +1,7 @@
 ---
 title: Hello World
 date: 2016-07-03
+draft: true
 ---
 
 This could be a blog about pretty things, like [nonsense](https://ncatlab.org/nlab/show/Yoneda+lemma)

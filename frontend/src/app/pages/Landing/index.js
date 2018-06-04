@@ -6,24 +6,6 @@ import githubIcon from 'app/images/github.png';
 import twitterIcon from 'app/images/twitter.png';
 import Contents from './Contents';
 
-const Description = styled.div`
-margin: 4em 0;
-`;
-
-const Socials = styled.div`
-margin: 4em 0;
-`;
-
-const Icon = styled.div`
-filter: blur(10px);
-background-size: @icon;
-background-image: url("${props => props.path}");
-background-repeat: no-repeat;
-width: 2em;
-height: 2em;
-margin: 2em 0;
-`;
-
 class Landing extends Component {
   props: {
     router: *
@@ -32,15 +14,18 @@ class Landing extends Component {
     return (
       <div>
         <Description>
-          morphism plumber
+          syntqx plumber
         </Description>
         <Socials>
-          <a href={'https://github.com/sleexyz'}>
-            <Icon path={githubIcon} />
-          </a>
-          <a href={'https://twitter.com/sleexyz'}>
-            <Icon path={twitterIcon} />
-          </a>
+          <Link href={'https://github.com/sleexyz'}>
+            github
+          </Link>
+          <Link href={'https://instagram.com/syntqxyz'}>
+            instagram
+          </Link>
+          <Link href={'https://twitter.com/syntqxyz'}>
+            twitter
+          </Link>
         </Socials>
         <Contents showDrafts={this.props.router.location.query.showDrafts === 'true'} />
       </div>
@@ -49,3 +34,21 @@ class Landing extends Component {
 }
 
 export default setTitle(() => 'sean lee')(Landing);
+
+const Description = styled.div`
+margin: 4em 0;
+color: white;
+`;
+
+const Socials = styled.div`
+margin: 4em 0;
+`;
+
+const Link = styled.a`
+  display: block;
+  color: white;
+  &:visited {
+    color: white;
+  }
+  padding-top: 10px;
+`;
